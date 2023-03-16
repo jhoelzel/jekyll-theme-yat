@@ -39,6 +39,10 @@
               <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
               {%- endif -%}
             {%- endfor -%}
+            {% assign navigation_items = site.data.navigation | where: "lang", page.lang %}
+            {% for item in navigation_items %}
+              <a class="page-link"  href="{{ item.url | relative_url }}">{{ item.title }}</a>
+            {% endfor %}
              <a class="page-link" href="https://www.linkedin.com/in/johannes-hölzel"><img src="https://img.shields.io/badge/linkedin%20-%230077B5.svg?&amp;style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" alt="Linkedin"></a>
              <a class="page-link" href="https://github.com/jhoelzel"><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="GitHub"></a>
 
@@ -54,6 +58,14 @@
               </span>
             {%- endif -%}
           </div>
+          <div class="language-switcher">
+  {% for lang in site.languages %}
+    {% if lang != page.lang %}
+      <a href="{{ site.baseurl_root }}/{{ lang }}{{ page.url | remove_first: page.lang }}">{{ lang }}</a>
+    {% endif %}
+  {% endfor %}
+</div>
+
         </nav>
       {%- endif -%}
     </div>
